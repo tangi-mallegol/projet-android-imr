@@ -1,6 +1,7 @@
 package fr.enssat.tangimallegol_mathieugouhier.geoquest;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,9 @@ public class HomeActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 23) {
             checkPermissions();
         }
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+
     }
 
 
