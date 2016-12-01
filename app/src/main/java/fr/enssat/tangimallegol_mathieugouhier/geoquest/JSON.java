@@ -19,7 +19,14 @@ import java.io.StringReader;
 public class JSON {
 
     class Indice {
+        @SerializedName("indice")
+        String indice;
 
+        @SerializedName("image_src")
+        String imgSrc;
+
+        @SerializedName("loc")
+        String loc;
     }
 
     class Data {
