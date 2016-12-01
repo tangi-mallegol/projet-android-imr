@@ -25,6 +25,8 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
 
+        JSON.parse();
+
     }
 
 

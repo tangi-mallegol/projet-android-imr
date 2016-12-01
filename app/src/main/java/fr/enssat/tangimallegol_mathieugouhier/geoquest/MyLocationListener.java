@@ -11,7 +11,7 @@ import org.osmdroid.util.GeoPoint;
 /**
  * Created by tangimallegol on 22/11/2016.
  */
-class MyLocationListener implements LocationListener {
+public class MyLocationListener implements LocationListener {
     IMapController controller;
     public MyLocationListener(IMapController controller){
         this.controller = controller;
