@@ -32,6 +32,7 @@ public class MapActivity extends AppCompatActivity {
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
+        map.setMaxZoomLevel(22);
         IMapController mapController = map.getController();
         mapController.setZoom(16);
         LocationManager locationManager = (LocationManager)
