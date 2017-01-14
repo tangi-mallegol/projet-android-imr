@@ -13,11 +13,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+
+import java.io.InputStreamReader;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -27,7 +30,6 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
         //important! set your user agent to prevent getting banned from the osm servers
         org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
-
         MapView map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
@@ -37,7 +39,9 @@ public class MapActivity extends AppCompatActivity {
         mapController.setZoom(16);
         LocationManager locationManager = (LocationManager)
         getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locationListener = new MyLocationListener(mapController);
+        TextView textView = (TextView)findViewById(R.id.indice);
+        JSON.Data data = JSON.parse(new InputStreamReader(getResources().openRawResource(R.raw.road)));
+        LocationListener locationListener = new MyLocationListener(mapController, data, this, textView);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -52,6 +56,7 @@ public class MapActivity extends AppCompatActivity {
         Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         GeoPoint startPoint = new GeoPoint(loc.getLongitude(), loc.getLatitude());
         mapController.setCenter(startPoint);
+
     }
 
 }

@@ -1,0 +1,23 @@
+{
+  "titre" : "parcours1",
+  "trajets" : [
+    {
+      "indice" : "Allez à l'ENSSAT",
+      "image_src" : "photo.jpg",
+      "loc" : [
+        48.729833,
+        -3.462588
+      ],
+      "rayon" : 5
+    },
+    {
+      "indice" : "Allez chez Tangi",
+      "image_src" : "photo.jpg",
+      "loc" : [
+        48.728203,
+        -3.457743
+      ],
+      "rayon" : 5
+    }
+  ]
+}

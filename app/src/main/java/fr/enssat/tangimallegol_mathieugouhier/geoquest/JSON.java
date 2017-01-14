@@ -10,7 +10,9 @@ import com.google.gson.annotations.SerializedName;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Reader;
 import java.io.StringReader;
+import java.lang.reflect.Array;
 
 /**
  * Created by matgo on 01/12/2016.
@@ -26,10 +28,13 @@ public class JSON {
         String imgSrc;
 
         @SerializedName("loc")
-        String loc;
+        float[] loc;
+
+        @SerializedName("rayon")
+        int rayon;
     }
 
-    class Data {
+    public class Data {
         @SerializedName("titre")
         String title;
 
@@ -37,39 +42,13 @@ public class JSON {
         Indice[] path;
     }
 
-    public static void parse() {
-        String jsonLine = "{"+
-                "\"titre\" : \"parcours1\","+
-                "\"trajets\" : [{"+
-            "\"indice\" : \"Allez sous la statue\","+
-                    "\"image_src\" : \"photo.jpg\","+
-                    "\"loc\" : {"+
-                "\"geoJSON\" : \"GEOJSON\","+
-                        "\"rayon\" : 5"+
-            "}"+
-        "}"+
-        "]"+
-        "}";
-
+    public static Data parse(Reader reader) {
         Gson gson = new Gson();
-        Data data = gson.fromJson(new StringReader(jsonLine), Data.class);
-
-
-
-        JsonElement jelement = new JsonParser().parse(jsonLine);
-        JsonObject jobject = jelement.getAsJsonObject();
-
-
-
-        //jobject = jobject.getAsJsonObject("titre");
-
-        /*
-        JsonArray jarray = jobject.getAsJsonArray("trajets");
-        jobject = jarray.get(0).getAsJsonObject();*/
-
-        String result = jobject.get("titre").toString();
-
-        System.out.println(result);
+        Data data = gson.fromJson(reader, Data.class);
+        for (Indice i : data.path) {
+            System.out.println(i.indice);
+        }
+        return data;
     }
 
 }
