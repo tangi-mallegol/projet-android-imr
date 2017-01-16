@@ -2,6 +2,7 @@ package fr.enssat.tangimallegol_mathieugouhier.geoquest;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -44,7 +45,9 @@ public class MapActivity extends AppCompatActivity {
         //On récupère l'imageView pour afficher la photo optionnelle pour les indices
         ImageView imageView = (ImageView)findViewById(R.id.photo);
         //On récupère le parcours
-        JSON.Data data = JSON.parse(new InputStreamReader(getResources().openRawResource(R.raw.road)));
+        SharedPreferences settings = getSharedPreferences("MyJSON", 0);
+        String res = settings.getString("json", "");
+        JSON.Data data = JSON.parseString(res);
         //Initialisation du LocationListener qui mettra à jour la position de l'utilisateur et modifiera les indices en fonction de cette position
         LocationListener locationListener = new MyLocationListener(mapController, data, this, textView, imageView);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

@@ -35,7 +35,7 @@ public class MyLocationListener implements LocationListener {
         this.activity = activity;
         this.end = false;
         this.textView = textView;
-        this.textView.setText(data.path[index_place].indice);
+        this.textView.setText(data.path.get(index_place).indice);
         this.imageView = imageView;
     }
 
@@ -47,24 +47,24 @@ public class MyLocationListener implements LocationListener {
         controller.setCenter(startPoint);
         //Si tous les points n'ont pas été trouvés
         if(!end){
-            GeoPoint pointRecherche = new GeoPoint(data.path[index_place].loc[0], data.path[index_place].loc[1]);
+            GeoPoint pointRecherche = new GeoPoint(data.path.get(index_place).loc[0], data.path.get(index_place).loc[1]);
             //Si l'utilisateur se trouve à moins de "rayon" du point recherché
-            if(startPoint.distanceTo(pointRecherche) < data.path[index_place].rayon){
+            if(startPoint.distanceTo(pointRecherche) < data.path.get(index_place).rayon){
                 //On passe à l'indice suivant
                 index_place ++;
-                if(index_place == data.path.length){
+                if(index_place == data.path.size()){
                     //Si il ne reste plus d'indice, on va indiquer que l'aventure est terminée
                     end = true;
                     Toast.makeText(activity, "Bravo ! Vous avez terminé le parcours !", Toast.LENGTH_LONG).show();
                 } else {
                     //Sinon on met à jour les variables
                     Toast.makeText(activity, "Bravo ! Vous avez trouvé le nouvel endroit. La suite de l'aventure peut continuer ...", Toast.LENGTH_LONG).show();
-                    this.textView.setText(data.path[index_place].indice);
-                    if(data.path[index_place].imgSrc != ""){
+                    this.textView.setText(data.path.get(index_place).indice);
+                    if(data.path.get(index_place).imgSrc != ""){
                         Class res = R.drawable.class;
                         Field field = null;
                         try {
-                            field = res.getField(data.path[index_place].indice);
+                            field = res.getField(data.path.get(index_place).indice);
                             int drawableId = field.getInt(null);
                             this.imageView.setImageResource(drawableId);
                         } catch (NoSuchFieldException e) {

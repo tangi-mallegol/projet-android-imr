@@ -1,13 +1,19 @@
 package fr.enssat.tangimallegol_mathieugouhier.geoquest;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,11 +26,38 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        SharedPreferences settings = getSharedPreferences("MyJSON", 0);
+        //On met les données du JSON en cache de l'application, on ne se servira que de celles ci par la suite
+        if(settings.getBoolean("set", false) == false){
+            JSON.Data data = JSON.parse(new InputStreamReader(getResources().openRawResource(R.raw.road)));
+            SharedPreferences.Editor editor = settings.edit();
+            String return_ = new Gson().toJson(data);
+            editor.putString("json", return_);
+            editor.putBoolean("set", true);
+            editor.apply();
+        }
+        //On vérifie toutes les permissions
         if (Build.VERSION.SDK_INT >= 23) {
             checkPermissions();
         }
-        Intent intent = new Intent(this, MapActivity.class);
-        startActivity(intent);
+        //On défini les listeners des deux actions possibles
+        Button aventure = (Button)findViewById(R.id.aventure);
+        Button edition = (Button)findViewById(R.id.edition);
+        final Activity that = this;
+        aventure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(that, MapActivity.class);
+                startActivity(intent);
+            }
+        });
+        edition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(that, EditionActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

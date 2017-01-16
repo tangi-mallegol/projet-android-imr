@@ -28,7 +28,8 @@
             android:name=".MapActivity"
             android:label="@string/title_activity_map"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".EditionActivity"></activity>
+        <activity android:name=".EditionActivity" />
+        <activity android:name=".EditionIndice"></activity>
     </application>
 
 </manifest>

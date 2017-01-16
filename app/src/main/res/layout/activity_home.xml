@@ -10,8 +10,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="fr.enssat.tangimallegol_mathieugouhier.geoquest.HomeActivity">
 
-    <TextView
+    <Button
+        android:text="Edition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_below="@+id/aventure"
+        android:layout_alignRight="@+id/aventure"
+        android:layout_alignEnd="@+id/aventure"
+        android:width="400px"
+        android:layout_marginTop="24dp"
+        android:id="@+id/edition" />
+
+    <Button
+        android:text="Aventure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:width="400px"
+        android:id="@+id/aventure"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
