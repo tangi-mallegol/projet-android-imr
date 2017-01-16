@@ -1,6 +1,7 @@
 package fr.enssat.tangimallegol_mathieugouhier.geoquest;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.util.GeoPoint;
 
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 
 /**
  * Created by tangimallegol on 22/11/2016.
@@ -59,7 +61,17 @@ public class MyLocationListener implements LocationListener {
                     Toast.makeText(activity, "Bravo ! Vous avez trouvé le nouvel endroit. La suite de l'aventure peut continuer ...", Toast.LENGTH_LONG).show();
                     this.textView.setText(data.path[index_place].indice);
                     if(data.path[index_place].imgSrc != ""){
-                        //this.imageView.setImageResource(new InputStreamReader(activity.getResources().getIdentifier() .openRawResource(path[index_place].indice)));
+                        Class res = R.drawable.class;
+                        Field field = null;
+                        try {
+                            field = res.getField(data.path[index_place].indice);
+                            int drawableId = field.getInt(null);
+                            this.imageView.setImageResource(drawableId);
+                        } catch (NoSuchFieldException e) {
+                            e.printStackTrace();
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

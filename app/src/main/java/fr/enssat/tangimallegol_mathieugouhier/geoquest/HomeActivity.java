@@ -28,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    // START PERMISSION CHECK
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
 
     private void checkPermissions() {
@@ -52,6 +51,6 @@ public class HomeActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= 23) {
                 requestPermissions(params, REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
             }
-        } // else: We already have permissions, so handle as normal
+        }
     }
 }
