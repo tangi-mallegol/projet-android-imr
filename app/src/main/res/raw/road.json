@@ -3,7 +3,7 @@
   "trajets" : [
     {
       "indice" : "Allez à l'ENSSAT",
-      "image_src" : "photo.jpg",
+      "image_src" : "enssat.jpg",
       "loc" : [
         48.729833,
         -3.462588
@@ -12,7 +12,6 @@
     },
     {
       "indice" : "Allez chez Tangi",
-      "image_src" : "photo.jpg",
       "loc" : [
         48.728203,
         -3.457743
