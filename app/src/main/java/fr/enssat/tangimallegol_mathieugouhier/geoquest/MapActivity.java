@@ -21,6 +21,7 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.OverlayItem;
 
 import java.io.InputStreamReader;
 
@@ -55,9 +56,11 @@ public class MapActivity extends AppCompatActivity {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
         Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        GeoPoint startPoint = new GeoPoint(loc.getLongitude(), loc.getLatitude());
-        mapController.setCenter(startPoint);
 
+        if(loc != null) {
+            GeoPoint startPoint = new GeoPoint(loc.getLongitude(), loc.getLatitude());
+            mapController.setCenter(startPoint);
+        }
     }
 
 }
